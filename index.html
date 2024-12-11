@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desain Website Modern</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Menambahkan link Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="hero">
+        <nav>
+            <div class="logo">Atmastro</div>
+            <ul>
+                <li><a href="#about">Profile</a></li>
+                <li><a href="#services">Layanan</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
+        </nav>
+        <div class="hero-content">
+            <h1>Selamat Datang di Atmastro</h1>
+            <p>Jelajahi Pengetahuanmu tentang ilmu Astro di sekelilingmu.</p>
+            <a href="#contact" class="btn-primary">Contact Person</a>
+        </div>
+    </header>
+
+    <!-- Profile -->
+    <section id="about" class="section">
+        <h2>Profile</h2>
+        <p>Informasi berkaitan tentang diri saya</p>
+        <a href="Profile/index.html">
+            <button>Read More</button>
+        </a>
+    </section>
+
+    <!-- Layanan -->
+    <section id="services" class="section">
+        <h2>Menu Pilihan</h2>
+        <div class="card-container">
+            <div class="card">
+                <h3>Peramalan Zodiac</h3>
+                <p>Meramal Zodiac Sesuai Tanggal Lahir Pengguna</p>
+                <a href="/Ramalan Zodiac/index.html" class="button">Ramalan Zodiac</a>
+            </div>
+            <div class="card">
+                <h3>Simulasi Orbit Planet</h3>
+                <p>Simulasi Orbit Planet pada Tata Surya</p>
+                <a href="/Simulasi Tata Surya/index.html" class="button">Simulasi Tata Surya</a>
+            </div>
+            <div class="card">
+                <h3>Perhitungan Periode Orbit Planet</h3>
+                <p>Menghitung Periode Orbit Planet di Tata Surya .</p>
+                <a href="/Perhitungan Orbit Planet/index.html" class="button">Perhitungan Orbit Planet</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontak -->
+    <section id="contact" class="section">
+        <h2>Kontak Personal</h2>
+        <ul>
+            <li><i class="fab fa-instagram"></i> Instagram: @ftriat_</li>
+            <li><i class="fab fa-facebook"></i> Facebook: Fajri Tri Atmaja</li>
+            <li><i class="fas fa-envelope"></i> Email: sdaffa57@gmail.com</li>
+        </ul>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>By @Fajri Tri Atmaja</p>
+    </footer>
+
+    <!-- Animasi Scroll -->
+    <script>
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+
+        function checkVisibility() {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                if (isElementInViewport(section)) {
+                    section.classList.add('visible');
+                }
+            });
+        }
+
+        // Animasi ulang saat tombol "Kontak" ditekan
+        document.querySelector('nav ul li a[href="#contact"]').addEventListener('click', function (e) {
+            e.preventDefault(); // Mencegah tindakan default
+            const contactSection = document.querySelector('#contact');
+            
+            // Reset animasi dengan menghapus kelas
+            contactSection.classList.remove('visible');
+            
+            // Tambahkan ulang animasi setelah sedikit waktu
+            setTimeout(() => contactSection.classList.add('visible'), 50);
+
+            // Scroll ke bagian kontak dengan efek halus
+            contactSection.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        window.addEventListener('scroll', checkVisibility);
+        document.addEventListener('DOMContentLoaded', checkVisibility);
+    </script>
+</body>
+</html>
