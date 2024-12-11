@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alat Ramalan Zodiac</title>
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: url('/Gambar/Zodiac.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fdfdfd;
+            text-align: center;
+            height: 100vh;
+            opacity: 0; /* Awal transparan */
+            animation: fadeInPage 1.5s ease-in-out forwards; /* Animasi masuk */
+        }
+
+        header {
+            padding: 20px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 36px;
+        }
+
+        header p {
+            font-size: 18px;
+        }
+
+        .form-section {
+            margin: 30px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        input[type="date"] {
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            border: 2px solid #000000;
+            border-radius: 5px;
+            width: 200px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #1e88e5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #1565c0;
+        }
+
+        .result-section {
+            display: none;
+            margin-top: 30px;
+        }
+
+        #zodiac-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        #zodiac-image img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        #zodiac-description {
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        footer {
+            color: white;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        /* Animasi */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInPage {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Konstellasi Zodiak</h1>
+        <p>Masukkan sesuai tanggal lahir Anda untuk mengetahui zodiak dan ramalannya!</p>
+    </header>
+
+    <section class="form-section">
+        <form id="zodiac-form">
+            <label for="birthdate">Tanggal Lahir:</label>
+            <input type="date" id="birthdate" required>
+            <button type="submit">Cek</button>
+        </form>
+    </section>
+
+    <section id="zodiac-result" class="result-section">
+        <h2>Hasil Ramalan</h2>
+        <div id="zodiac-name"></div>
+        <div id="zodiac-image"></div>
+        <div id="zodiac-description"></div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 By Fajri Tri Atmaja.</p>
+    </footer>
+
+    <script>
+        document.getElementById('zodiac-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const birthdate = new Date(document.getElementById('birthdate').value);
+            const month = birthdate.getMonth() + 1;
+            const day = birthdate.getDate();
+
+            let zodiac = "";
+            let description = "";
+            let imageSrc = "";
+
+            if ((month == 3 && day >= 21) || (month == 4 && day <= 19)) {
+                zodiac = "Aries";
+                description = "Aries adalah zodiak yang penuh energi, berani, dan memiliki semangat kompetitif yang tinggi.";
+                imageSrc = "/Gambar/Aries.jpeg";
+            } else if ((month == 4 && day >= 20) || (month == 5 && day <= 20)) {
+                zodiac = "Taurus";
+                description = "Taurus dikenal dengan ketekunannya, kesetiaannya, dan kecintaannya terhadap kenyamanan.";
+                imageSrc = "/Gambar/Taurus.jpeg";
+            } else if ((month == 5 && day >= 21) || (month == 6 && day <= 20)) {
+                zodiac = "Gemini";
+                description = "Gemini adalah pribadi yang mudah beradaptasi, suka berkomunikasi, dan memiliki sifat ganda.";
+                imageSrc = "/Gambar/Gemini.jpeg";
+            } else if ((month == 6 && day >= 21) || (month == 7 && day <= 22)) {
+                zodiac = "Cancer";
+                description = "Cancer dikenal dengan sifatnya yang emosional dan penuh kasih sayang.";
+                imageSrc = "/Gambar/Cancer.jpeg";
+            } else if ((month == 7 && day >= 23) || (month == 8 && day <= 22)) {
+                zodiac = "Leo";
+                description = "Leo adalah pemimpin alami, berani, dan penuh dengan semangat kreatif.";
+                imageSrc = "/Gambar/Leo.jpeg";
+            } else if ((month == 8 && day >= 23) || (month == 9 && day <= 22)) {
+                zodiac = "Virgo";
+                description = "Virgo dikenal dengan kecerdasannya, detail-oriented, dan analitis.";
+                imageSrc = "/Gambar/Virgo.jpeg";
+            } else if ((month == 9 && day >= 23) || (month == 10 && day <= 22)) {
+                zodiac = "Libra";
+                description = "Libra mencari keseimbangan, harmoni, dan keadilan dalam hidup.";
+                imageSrc = "/Gambar/libra.jpeg";
+            } else if ((month == 10 && day >= 23) || (month == 11 && day <= 21)) {
+                zodiac = "Scorpio";
+                description = "Scorpio adalah zodiak yang penuh dengan gairah, intensitas, dan loyalitas.";
+                imageSrc = "/Gambar/Scorpio.jpeg";
+            } else if ((month == 11 && day >= 22) || (month == 12 && day <= 21)) {
+                zodiac = "Sagittarius";
+                description = "Sagittarius adalah petualang yang bebas, optimis, dan penuh semangat.";
+                imageSrc = "/Gambar/sagitarius.jpeg";
+            } else if ((month == 12 && day >= 22) || (month == 1 && day <= 19)) {
+                zodiac = "Capricorn";
+                description = "Capricorn adalah zodiak yang ambisius, praktis, dan penuh tanggung jawab.";
+                imageSrc = "/Gambar/capricon.jpeg";
+            } else if ((month == 1 && day >= 20) || (month == 2 && day <= 18)) {
+                zodiac = "Aquarius";
+                description = "Aquarius dikenal dengan ide-ide inovatif, pemikir bebas, dan idealis.";
+                imageSrc = "/Gambar/Aqua.jpeg";
+            } else if ((month == 2 && day >= 19) || (month == 3 && day <= 20)) {
+                zodiac = "Pisces";
+                description = "Pisces adalah zodiak yang intuitif, empatik, dan penuh dengan imajinasi.";
+                imageSrc = "/Gambar/pisces.jpeg";
+            }
+
+            displayResult(zodiac, imageSrc, description);
+        });
+
+        function displayResult(zodiac, imageSrc, description) {
+            const resultSection = document.getElementById('zodiac-result');
+            resultSection.style.display = 'block';
+            resultSection.classList.add('fade-in');
+
+            document.getElementById('zodiac-name').textContent = "Zodiak Anda: " + zodiac;
+            document.getElementById('zodiac-image').innerHTML = `<img src="${imageSrc}" alt="${zodiac}">`;
+            document.getElementById('zodiac-description').textContent = description;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animasi Tata Surya</title>
+  <style>
+  body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('/Gambar/Buat\ TATA.jpeg') ; /* Ganti dengan path gambar Anda */
+    background-size: cover; /* Menyesuaikan gambar dengan ukuran layar */
+    background-position: center; /* Menempatkan gambar di tengah */
+    overflow: hidden;
+    color: white;
+    font-family: Arial, sans-serif;
+    opacity: 0; /* Awalnya tidak terlihat */
+    transition: opacity 2s ease-in-out; /* Efek pudar masuk */
+  }
+
+  body.visible {
+    opacity: 1; /* Setelah animasi selesai, tampilkan elemen */
+  }
+
+    .solar-system {
+      position: relative;
+      width: 600px;
+      height: 600px;
+    }
+
+    .sun {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 50px;
+      height: 50px;
+      background-color: yellow;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 30px yellow;
+    }
+
+    .orbit {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      border: 1px dashed rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .planet {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 10px white;
+    }
+
+    .orbit1 { width: 100px; height: 100px; animation: rotate 4s linear infinite; }
+    .orbit2 { width: 150px; height: 150px; animation: rotate 6s linear infinite; }
+    .orbit3 { width: 200px; height: 200px; animation: rotate 8s linear infinite; }
+    .orbit4 { width: 250px; height: 250px; animation: rotate 10s linear infinite; }
+    .orbit5 { width: 300px; height: 300px; animation: rotate 12s linear infinite; }
+    .orbit6 { width: 350px; height: 350px; animation: rotate 14s linear infinite; }
+    .orbit7 { width: 400px; height: 400px; animation: rotate 16s linear infinite; }
+    .orbit8 { width: 450px; height: 450px; animation: rotate 18s linear infinite; }
+
+    .planet1 { background-color: gray; }
+    .planet2 { background-color: orange; }
+    .planet3 { background-color: blue; }
+    .planet4 { background-color: red; }
+    .planet5 { background-color: brown; }
+    .planet6 { background-color: lightblue; }
+    .planet7 { background-color: cyan; }
+    .planet8 { background-color: purple; }
+
+    .planet-name {
+      position: absolute;
+      top: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      text-align: center;
+      color: white;
+    }
+
+    @keyframes rotate {
+      from {
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+      to {
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
+
+    .controls {
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 5px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background-color: #005f73;
+      color: white;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #24bbcb;
+    }
+  </style>
+</head>
+<body>
+  <div class="solar-system">
+    <div class="sun"></div>
+    <div class="orbit orbit1">
+      <div class="planet planet1">
+        <div class="planet-name">Merkurius</div>
+      </div>
+    </div>
+    <div class="orbit orbit2">
+      <div class="planet planet2">
+        <div class="planet-name">Venus</div>
+      </div>
+    </div>
+    <div class="orbit orbit3">
+      <div class="planet planet3">
+        <div class="planet-name">Bumi</div>
+      </div>
+    </div>
+    <div class="orbit orbit4">
+      <div class="planet planet4">
+        <div class="planet-name">Mars</div>
+      </div>
+    </div>
+    <div class="orbit orbit5">
+      <div class="planet planet5">
+        <div class="planet-name">Jupiter</div>
+      </div>
+    </div>
+    <div class="orbit orbit6">
+      <div class="planet planet6">
+        <div class="planet-name">Saturnus</div>
+      </div>
+    </div>
+    <div class="orbit orbit7">
+      <div class="planet planet7">
+        <div class="planet-name">Uranus</div>
+      </div>
+    </div>
+    <div class="orbit orbit8">
+      <div class="planet planet8">
+        <div class="planet-name">Neptunus</div>
+      </div>
+    </div>
+  </div>
+  <div class="controls">
+    <button id="start">Mulai</button>
+    <button id="stop">Berhenti</button>
+  </div>
+  <script>
+    const startButton = document.getElementById('start');
+    const stopButton = document.getElementById('stop');
+    const orbits = document.querySelectorAll('.orbit');
+    const body = document.body;
+
+    // Menambahkan kelas 'visible' ke body setelah halaman dimuat
+    window.addEventListener('load', () => {
+      body.classList.add('visible');
+    });
+
+    startButton.addEventListener('click', () => {
+      orbits.forEach(orbit => {
+        orbit.style.animationPlayState = 'running';
+      });
+    });
+
+    stopButton.addEventListener('click', () => {
+      orbits.forEach(orbit => {
+        orbit.style.animationPlayState = 'paused';
+      });
+    });
+  </script>
+</body>
+</html>

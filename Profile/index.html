@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Halaman Profil</title>
+  <style>
+    /* Reset margin dan padding */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body */
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('/Gambar/Buat\ Prof.jpg'); /* Contoh link gambar */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    /* Wrapper untuk konten */
+    .profile-container {
+      background-color: rgba(4, 82, 150, 0.8); /* Warna latar belakang dengan sedikit transparansi */
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(164, 6, 221, 0.694);
+      max-width: 900px;
+      width: 100%;
+      padding: 30px;
+      text-align: center;
+      transform: translateY(50px);
+      opacity: 0;
+      animation: fadeInUp 1s ease-in-out forwards, floating 3s ease-in-out infinite, changeColor 10s infinite alternate;
+    }
+
+    /* Animasi untuk perubahan warna otomatis */
+    @keyframes changeColor {
+      0% {
+        background-color: rgba(4, 82, 150, 0.8); /* Warna pertama */
+      }
+      50% {
+        background-color: rgba(59, 89, 152, 0.8); /* Warna kedua */
+      }
+      0% {
+        background-color: rgba(240, 240, 240, 0.8); /* Warna ketiga */
+      }
+    }
+
+    /* Animasi untuk muncul */
+    @keyframes fadeInUp {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Animasi mengambang */
+    @keyframes floating {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px); /* Bergerak naik */
+      }
+      100% {
+        transform: translateY(0); /* Kembali ke posisi awal */
+      }
+    }
+
+    /* Gambar profil */
+    .profile-image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      object-fit: cover;
+      border: 4px solid #3b5998;
+    }
+
+    /* Nama dan pekerjaan */
+    .name {
+      font-size: 2em;
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    .title {
+      font-size: 1.2em;
+      color: #ccc;
+      margin-bottom: 20px;
+    }
+
+    /* Deskripsi */
+    .bio {
+      font-size: 1.1em;
+      color: #eaeaea;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    /* Tombol untuk melihat lebih banyak */
+    .btn-primary {
+      background-color: #3b5998;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s;
+    }
+
+    .btn-primary:hover {
+      background-color: #2a4377;
+    }
+
+    /* Responsif: Mengatur layout untuk tampilan mobile */
+    @media (max-width: 768px) {
+      .profile-container {
+        padding: 20px;
+      }
+
+      .profile-image {
+        width: 120px;
+        height: 120px;
+      }
+
+      .name {
+        font-size: 1.8em;
+      }
+
+      .title {
+        font-size: 1em;
+      }
+
+      .bio {
+        font-size: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="profile-container">
+    <img src="/Gambar/Lppm.jpg" alt="Foto Profil" class="profile-image">
+    <h1 class="name">Fajri Tri Atmaja</h1>
+    <p class="title">Tentang saya</p>
+    <p class="bio">
+      Saya Adalah seorang mahasiswa Program studi Sains Atmosfer dan Keplanetan (SAP),Sekarang saya sedang menempuh pendidikan Sarjana di kampus Institut Teknologi Sumatera ITERA.Saya adalah pengembang web Atmastro ini,Terima kasih telah mengunjungi web saya,saya harap anda mendapat banyak pengalaman dari web ini.....
+    </p>
+  </div>
+
+</body>
+</html>
