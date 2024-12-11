@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perhitungan Periode Orbit Planet</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-image: url('/Gambar/Buat\ TATA.jpeg'); /* Ganti dengan URL gambar Tata Surya */
+    background-size: cover; /* Pastikan gambar menutupi seluruh area */
+    background-position: center; /* Menempatkan gambar di tengah */
+    background-attachment: fixed; /* Membuat gambar tetap saat halaman digulir (parallax effect) */
+    color: white; /* Mengubah warna teks agar kontras dengan latar belakang */
+}
+
+        h1 {
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: rgb(21, 169, 206);
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeIn 4s forwards; /* Durasi 4 detik untuk efek fade-in */
+        }
+        .calculation-steps {
+            background-color: #1812d3;
+            padding: 10px;
+            margin-top: 20px;
+            border-left: 4px solid #4CAF50;
+            opacity: 0;
+            animation: fadeIn 5s forwards; /* Durasi lebih panjang untuk langkah-langkah */
+        }
+
+        pre {
+            background-color: #1eb1ce;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        /* Animasi Pudar Masuk Perlahan */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Perhitungan Periode Orbit Planet</h1>
+
+    <div class="container">
+        <label for="distance">Masukkan Jarak Planet (AU):</label>
+        <input type="number" id="distance" placeholder="Masukkan jarak planet dari Matahari dalam AU" step="any" required>
+
+        <button onclick="calculateOrbit()">Hitung Periode Orbit</button>
+
+        <div id="result" class="result"></div>
+
+        <div id="steps" class="calculation-steps"></div>
+
+        <div id="planet" class="result"></div>
+    </div>
+
+    <script>
+        // Data jarak rata-rata orbit planet dalam AU
+        const planets = {
+            Merkurius: 0.39,
+            Venus: 0.72,
+            Bumi: 1.00,
+            Mars: 1.52,
+            Jupiter: 5.20,
+            Saturnus: 9.58,
+            Uranus: 19.18,
+            Neptunus: 30.07
+        };
+
+        function calculateOrbit() {
+            // Ambil jarak planet yang dimasukkan oleh pengguna
+            const distance = parseFloat(document.getElementById('distance').value);
+
+            // Periksa apakah input valid
+            if (isNaN(distance) || distance <= 0) {
+                alert("Silakan masukkan jarak yang valid (lebih besar dari 0 AU).");
+                return;
+            }
+
+            // Menggunakan rumus Kepler untuk menghitung periode orbit (dalam tahun)
+            const periodInYears = Math.sqrt(Math.pow(distance, 3));
+
+            // Mengonversi periode orbit dalam tahun ke bulan dan hari
+            const periodInMonths = periodInYears * 12;
+            const periodInDays = periodInYears * 365.25;
+
+            // Menampilkan hasil perhitungan dengan animasi pudar masuk
+            setTimeout(() => {
+                const resultText = `
+                    <p><strong>Periode orbit planet dengan jarak ${distance} AU dari Matahari adalah sekitar:</strong></p>
+                    <ul>
+                        <li><strong>${Math.round(periodInYears)} tahun</strong></li>
+                        <li><strong>${Math.round(periodInMonths)} bulan</strong></li>
+                        <li><strong>${Math.round(periodInDays)} hari</strong></li>
+                    </ul>
+                `;
+                document.getElementById('result').innerHTML = resultText;
+            }, 2000); // Delay 2 detik untuk hasil
+
+            // Menampilkan langkah-langkah perhitungan secara terperinci
+            setTimeout(() => {
+                const stepsText = `
+                    <h3>Langkah-langkah Perhitungan:</h3>
+                    <pre>
+Langkah-langkah:
+1. Masukkan jarak planet dari Matahari (r) dalam AU: <strong>${distance} AU</strong>
+2. Hitung kubus jarak (r³): <strong>${Math.pow(distance, 3)}</strong>
+   Misalnya, jika r = 1.88 AU, maka r³ = 1.88³ = ${Math.pow(distance, 3).toFixed(3)}
+3. Ambil akar kuadrat dari hasil kubus (√r³): <strong>√${Math.pow(distance, 3).toFixed(3)} = ${periodInYears.toFixed(2)} tahun</strong>
+4. Hasilnya adalah periode orbit planet dalam tahun: <strong>${Math.round(periodInYears)} tahun</strong>
+5. Kemudian, konversi ke bulan: <strong>${Math.round(periodInMonths)} bulan</strong>
+6. Konversi ke hari: <strong>${Math.round(periodInDays)} hari</strong>
+                    </pre>
+                `;
+                document.getElementById('steps').innerHTML = stepsText;
+            }, 4000); // Delay 4 detik sebelum menampilkan langkah-langkah
+
+            // Menebak planet berdasarkan jarak yang dimasukkan
+            const closestPlanet = getClosestPlanet(distance);
+            setTimeout(() => {
+                const planetText = ` 
+                    <p>Planet yang jaraknya paling mendekati ${distance} AU adalah <strong>${closestPlanet.name}</strong> dengan jarak sekitar <strong>${closestPlanet.distance} AU</strong>.</p>
+                `;
+                document.getElementById('planet').innerHTML = planetText;
+            }, 6000); // Delay 6 detik sebelum menampilkan planet terdekat
+        }
+
+        // Fungsi untuk mencari planet yang jaraknya paling mendekati
+        function getClosestPlanet(distance) {
+            let closestPlanet = null;
+            let minDiff = Infinity;
+
+            for (const planet in planets) {
+                const diff = Math.abs(planets[planet] - distance);
+                if (diff < minDiff) {
+                    minDiff = diff;
+                    closestPlanet = {
+                        name: planet,
+                        distance: planets[planet]
+                    };
+                }
+            }
+
+            return closestPlanet;
+        }
+    </script>
+
+</body>
+</html>
